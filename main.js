@@ -1,7 +1,8 @@
-import { queryInventory } from "./src/inventory.js";
+import { createInventory, queryInventory } from "./src/inventory.js";
 
 const main = (args) => {
-  queryInventory(args);
+  const inventory = createInventory();
+  queryInventory(inventory ,args);
 }
 
-main(Deno.args)
+main(Deno.args);
