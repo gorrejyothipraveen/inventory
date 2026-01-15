@@ -2,7 +2,9 @@ export const queryInventory = (inventory, args) => {
   if (inventory === undefined) {
     throw new Error("inventory does not exist");
   }
-  return inventory;
+
+  if (args[0] === "init") return initInventory(inventory);
+  if (args[0] === "list") return itemsList(inventory);
 };
 
 export const createInventory = () => {
@@ -15,4 +17,8 @@ export const initInventory = (inventory) => {
   }
 
   return inventory;
+};
+
+export const itemsList = (inventory) => {
+  return inventory.tables.items;
 };
