@@ -7,7 +7,7 @@ export const initInventory = (inventory) => {
     inventory.tables.items = [];
   }
 
-  return inventory;
+  return;
 };
 
 export const itemsList = (inventory) => {

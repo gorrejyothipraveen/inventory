@@ -52,7 +52,7 @@ Deno.test("retrieving the existing row from the items table", () => {
     quantity: 10,
   };
   inventory.tables.items = record;
-  const actual = inventoryFns.itemsList(inventory)
+  const actual = inventoryFns.itemsList(inventory);
   assertEquals(actual, record);
 });
 
@@ -74,7 +74,7 @@ Deno.test("retrieving rows , here two rows are added one is Keyboard and second 
 
   inventory.tables.items.push(record1);
   inventory.tables.items.push(record2);
-  const actual = queryInventory(inventory, inventoryFns, ["list"])
+  const actual = queryInventory(inventory, inventoryFns, ["list"]);
   assertEquals(actual, [record1, record2]);
 });
 
