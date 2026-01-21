@@ -2,29 +2,28 @@ export const createInventory = () => {
   return { tables: {} };
 };
 
-export const initInventory = (inventory) => {
-  if (inventory.tables.items === undefined) {
-    inventory.tables.items = [];
+export class Inventory{
+  constructor(inventory) {
+    this.inventory = inventory;
   }
 
-  return;
-};
+  initInventory = () => {
+    if (this.inventory.tables.items === undefined) {
+      this.inventory.tables.items = [];
+    }
+    return;
+  };
 
-export const itemsList = (inventory) => {
-  return inventory.tables.items;
-};
+  itemsList = () => {
+    return this.inventory.tables.items;
+  };
 
-export const addItem = (inventory, name, category, quantity) => {
-  const id = inventory.tables.items.length + 1;
-  const record = { id, name, category, quantity };
-  inventory.tables.items.push(record);
-  return inventory;
-};
+  addItem = ( name, category, quantity) => {
+    const id = this.inventory.tables.items.length + 1;
+    const record = { id, name, category, quantity };
+    this.inventory.tables.items.push(record);
+    return this.inventory;
+  };
 
-// export const updateItem = (inventory, id, newCategory) => {
-//   for(const item of inventory.tables.items) {
-//     if(item.id === id) {
-//       item.category = newCategory;
-//     }
-//   }
-// }
+
+}

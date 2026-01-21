@@ -1,4 +1,4 @@
-export const queryInventory = (inventory, inventoryFns, args) => {
+export const queryInventory = (inventory, args) => {
   if (inventory === undefined) {
     throw new Error("inventory does not exist");
   }
@@ -6,12 +6,12 @@ export const queryInventory = (inventory, inventoryFns, args) => {
 
   switch (args[0]) {
     case "init":
-      return inventoryFns.initInventory(inventory);
+      return inventory.initInventory();
     case "list":
-      return inventoryFns.itemsList(inventory);
+      return inventory.itemsList();
     case "add":
-      return inventoryFns.addItem(inventory, ...params);
+      return inventory.addItem(...params);
     case "update":
-      return inventoryFns.updateItemQuantity(inventory, ...params);
+      return inventory.updateItemQuantity(...params);
   }
 };

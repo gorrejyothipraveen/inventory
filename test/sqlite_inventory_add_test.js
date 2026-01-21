@@ -1,44 +1,43 @@
 import { afterEach, beforeEach, describe, it } from "jsr:@std/testing/bdd";
 import { queryInventory } from "../src/query_inventory.js";
-import { createInventory } from "../src/sqlite_inventory.js";
-import * as inventoryFns from "../src/sqlite_inventory.js";
+import { createInventory, Inventory} from "../src/sqlite_inventory.js";
 import { assertEquals } from "@std/assert";
 
 describe("adding the items into items table in inventory", () => {
   let inventory;
   beforeEach(() => {
-    inventory = createInventory();
-    queryInventory(inventory, inventoryFns, ["init"]);
+    inventory = new Inventory(createInventory())
+    queryInventory(inventory, ["init"]);
   });
 
   afterEach(() => inventory.close());
 
   it("inserting the one row into items table", () => {
-    queryInventory(inventory, inventoryFns, [
-      "add",
+    queryInventory(inventory, [
+      "add", 
       "Mouse",
       "electronics",
       10,
     ]);
-    const actual = queryInventory(inventory, inventoryFns, ["list"]);
+    const actual = queryInventory(inventory, ["list"]);
     const expected = 1;
     assertEquals(actual.length, expected);
   });
 
   it("inserting two rows into items table", () => {
-    queryInventory(inventory, inventoryFns, [
+    queryInventory(inventory, [
       "add",
       "Mouse",
       "electronics",
       10,
     ]);
-    queryInventory(inventory, inventoryFns, [
+    queryInventory(inventory, [
       "add",
       "Keyboard",
       "electronics",
       10,
     ]);
-    const actual = queryInventory(inventory, inventoryFns, ["list"]);
+    const actual = queryInventory(inventory, ["list"]);
     const expected = 2;
     assertEquals(actual.length, expected);
   });
