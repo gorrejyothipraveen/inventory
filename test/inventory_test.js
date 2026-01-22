@@ -1,6 +1,7 @@
 import { assertEquals, assertThrows } from "@std/assert";
 import { createInventory, Inventory } from "../src/memory_inventory.js";
 import { queryInventory } from "../src/query_inventory.js";
+import { beforeEach, describe, afterEach, it } from "@std/testing/bdd"; 
 
 Deno.test("simple test :", () => {
   let inventory;
@@ -101,4 +102,32 @@ Deno.test("inserting two items into items table", () => {
     quantity: 20,
   }];
   assertEquals(actual, expected);
+});
+
+describe("testing the update part : ", () => {
+  let inventory;
+  beforeEach(() => {
+    inventory = new Inventory(createInventory());
+    queryInventory(inventory, ["init"]);
+  });
+
+  afterEach(() => inventory.close());
+
+  it("updating the quantity of id 1 from 10 to 0", () => {
+    inventory.addItem("Keyboard", "electronics", 10);
+    inventory.updateItem(1, 0);
+    const actual = inventory.itemsList();
+    const expected = [ { id: 1, name: "Keyboard", category: "electronics", quantity: 0 } ]
+    assertEquals(actual, expected)
+  });
+  it("updating the quantity of id 2 from 10 to 0", () => {
+    inventory.addItem("Keyboard", "electronics", 10);
+    inventory.addItem("Keyboard", "electronics", 10);
+    inventory.updateItem(2, 0);
+    const actual = inventory.itemsList();
+    const expected = { id: 2, name: "Keyboard", category: "electronics", quantity: 0 } ;
+    assertEquals(actual[1], expected)
+  });
+
+
 });

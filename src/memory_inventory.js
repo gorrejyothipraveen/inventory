@@ -25,5 +25,17 @@ export class Inventory{
     return this.inventory;
   };
 
+  updateItem = (id, newQuantity) => {
+    const items = this.inventory.tables.items;
+    for(const item of items) {
+      if(item.id === id) {
+        item.quantity = newQuantity
+      }
+    }
+  }
+
+  close () {
+    this.inventory = [];
+  }
 
 }
